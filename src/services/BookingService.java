@@ -7,9 +7,9 @@ import java.util.List;
 public class BookingService {
 
     public void bookTickets(User user, Show show, List<Seat> seats){
-        System.out.println("entities.Booking started for movie :"+ show.getMovie().getMovieName());
+        System.out.println("Booking started for movie :"+ show.getMovie().getMovieName());
         if(!lockSeats(show,seats)){
-            System.out.println("entities.Booking failed, seats are not available. Please book other seats");
+            System.out.println("Booking failed, seats are not available. Please book other seats");
             return;
         }
         Booking booking = new Booking(user,show,seats,generateBookingId());
@@ -17,14 +17,14 @@ public class BookingService {
         boolean paymentSuccess = payment.processPayment();
         if(paymentSuccess){
             booking.confirmBooking();
-            System.out.println("entities.Booking created for movie "+show.getMovie().getMovieName());
-            System.out.println("entities.Show time "+show.getStartTime());
+            System.out.println("Booking created for movie "+show.getMovie().getMovieName());
+            System.out.println("Show time "+show.getStartTime());
             System.out.print("Your seats :");
             seats.forEach(seat -> System.out.print(seat.getRowNum()+""+seat.getColNum()+","));
             System.out.println("");
         }else{
             booking.cancelBooking();
-            System.out.println("entities.Booking cancelled due to payment failure");
+            System.out.println("Booking cancelled due to payment failure");
         }
     }
     private boolean lockSeats(Show show, List<Seat> seats) {
